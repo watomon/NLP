@@ -58,37 +58,6 @@ def corpus_read():
     #辞書のValueを各品詞の回数を数える
     c_dict = {}
     word_dict = {}
-    """
-    #辞書の中のカウント数を初期化する
-    for w in word_list :   # wordpos_listとword_indexを見比べて、
-        num = 0
-        for p in pos_index :
-            c_dict.setdefault(p, num) #全ての品詞の出現回数を初期化する
-        for pl in pos_list :
-            if pl in c_dict :
-                num+=1
-                c_dict.setdefault(p, num)
-        #for w in word_index
-        word_dict.setdefault(w, c_dict) #辞書の中に辞書を入れる
-        print(w,word_dict[w])
-    """
-
-    """
-    #辞書の中のカウント数を初期化する
-    for w in word_index :   # wordpos_listとword_indexを見比べて、
-        num = 0
-        for p in pos_index :
-            c_dict.setdefault(p, num) #全ての品詞の出現回数を初期化する
-        for pl in pos_list :
-            if pl in c_dict :
-                num+=1
-                c_dict.setdefault(p, num)
-        #for w in word_index
-        word_dict.setdefault(w, c_dict) #辞書の中に辞書を入れる
-    #print(word_dict)
-    """
-
-
 
 
     i = 0
@@ -109,7 +78,7 @@ def corpus_read():
                 print(pos_count)
             else :
                 pos_count.insert(j, num)
-                
+
             #print(pos_count)
             #辞書に登録できたら、一度pos_countを０で初期化して次の単語のループに入る
             #c_dict.setdefault(pos_index[i], pos_count[i])
