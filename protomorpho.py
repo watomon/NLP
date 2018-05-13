@@ -1,6 +1,7 @@
 #author : kawasaki
 import sys
 import re
+import copy
 
 def corpus_read():
     word_dic = {}
@@ -62,15 +63,25 @@ def corpus_read():
 
     for p in pos_index :
         c_dict[p] = 0   #最初は全て出現数は０にする
-    #二重辞書の作成
+
+    for w in word_index :
+        word_dict[w] = copy.copy(c_dict)
+
+    print(word_dict)
+    word_dict['Fujitsu']["NNP"] += 1
+    print(word_dict)
+
     """
+    #二重辞書の作成
     for w in word_index :
         word_dict[w] = word_dict.get(w,c_dict.copy())
-    """
+
     for w in word_index :
         #for p in pos_index :
         if w not in word_dict.keys():
-            word_dict[w] = c_dict.copy()
+            word_dict[w].get(c_dict.copy())
+    """
+
     #print(word_dict)
 
 
@@ -88,15 +99,19 @@ def corpus_read():
     i=0
     j=0
     #二重辞書へ出現数を登録する
-    for i in range(len(word_index)) :
-        w = word_index[i]
+    for i in range(len(word_list)) :
+        w = word_list[i]
+        print(w,word_dict[w])
+        p = pos_list[i]
+
         for j in range(len(pos_index)) :
-            p = pos_index[j]
-            if  
-                word_dict[w][p] += 1
+            if pos_list[i] == pos_index[j]:
+                word_dict[word_list[i]][pos_index[j]] += 1
 
-
-    print(word_dict)
+        print("id", id(word_dict[w]))
+        print(w,word_dict[w])
+        print()
+        print()
 
 
 def main():
