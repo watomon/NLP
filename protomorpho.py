@@ -1,27 +1,44 @@
 #author : kawasaki
+#coding:utf-8
 import sys
 import re
 import copy
 
 def corpus_read():
-    word_dic = {}
     wordpos_list = [] #単語/品詞のリスト
+
     word_list = []  #単語のリスト
     pos_list = []  #品詞のリスト
 
     word_index = [] #単語の索引（重複なし）
     pos_index = []  #品詞の索引（重複なし）
 
-
+    """
     #訓練データを文字列データに格納
     f = open('data/sample.train')
     corpus = f.readline()  # ファイル一行読んだデータを返す
     #corpus = f.read()
     f.close()
-
+    #print(corpus)
+    """
     #空白とスラッシュを区切りにして偶数番目に語句、奇数番目に品詞にする
-    wordpos_list = re.split('[/ ]', corpus)
 
+
+    f = open('data/sample.train','r')
+    corpus = f.read()
+
+    text = corpus.replace('\n',' ')
+
+    # print(text)
+
+    f.close()
+    wordpos_list = re.split('[/ ]', text)
+    #print(wordpos_list)
+
+    #改行文字の除去処理
+    for i in wordpos_list:
+        print(i)
+        i.lstrip("\n")
 
     for i in range(len(wordpos_list)) :
         if wordpos_list[i] == "\n" :
@@ -52,7 +69,7 @@ def corpus_read():
     for pos in pos_list :
         if pos not in pos_index :
             pos_index.append(pos)
-    print(pos_index)
+    #print(pos_index)
 
 
     #辞書のValueを各品詞の回数を数える
@@ -66,10 +83,8 @@ def corpus_read():
 
     for w in word_index :
         word_dict[w] = copy.copy(c_dict)
+    #print(word_dict)
 
-    print(word_dict)
-    word_dict['Fujitsu']["NNP"] += 1
-    print(word_dict)
 
     """
     #二重辞書の作成
@@ -82,36 +97,26 @@ def corpus_read():
             word_dict[w].get(c_dict.copy())
     """
 
-    #print(word_dict)
-
-
-    dict_firstkeys = list(word_dict.keys())
-    dict_secondkeys = list(c_dict.keys())
-    #print("これは単語辞書の最初のキー", dict_firstkeys)
-    #print("辞書の中の辞書のキー", dict_secondkeys)
-    """
-    (word_dict['Fujitsu'])['NNP'] = 1
-    #print(list(word_dict.keys()))
-    for w in list(word_dict.keys()):
-        for p in pos_index:
-            print(w,word_dict[w])
-    """
     i=0
     j=0
     #二重辞書へ出現数を登録する
     for i in range(len(word_list)) :
         w = word_list[i]
-        print(w,word_dict[w])
+        #print(w,word_dict[w])
         p = pos_list[i]
 
         for j in range(len(pos_index)) :
             if pos_list[i] == pos_index[j]:
                 word_dict[word_list[i]][pos_index[j]] += 1
-
-        print("id", id(word_dict[w]))
+        """
+        #print("id", id(word_dict[w]))
         print(w,word_dict[w])
         print()
-        print()
+        #print()
+        """
+
+    print("word_dict", word_dict)
+
 
 
 def main():
