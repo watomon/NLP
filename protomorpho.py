@@ -13,26 +13,12 @@ def corpus_read():
     word_index = [] #単語の索引（重複なし）
     pos_index = []  #品詞の索引（重複なし）
 
-    """
-    #訓練データを文字列データに格納
-    f = open('data/sample.train')
-    corpus = f.readline()  # ファイル一行読んだデータを返す
-    #corpus = f.read()
-    f.close()
-    #print(corpus)
-    """
     #空白とスラッシュを区切りにして偶数番目に語句、奇数番目に品詞にする
-
-
     f = open('data/sample.train','r')
-    corpus = f.read()
-
-    text = corpus.replace('\n',' ')
-
-    # print(text)
-
+    corpus = f.readline()
     f.close()
-    wordpos_list = re.split('[/ ]', text)
+
+    wordpos_list = re.split('[/ ]', corpus)
     #print(wordpos_list)
 
     #改行文字の除去処理
@@ -43,11 +29,12 @@ def corpus_read():
     for i in range(len(wordpos_list)) :
         if wordpos_list[i] == "\n" :
             wordpos_list.pop(i)
-
+    """
     for k in range(len(wordpos_list)):
         if wordpos_list[k] == "\n" or wordpos_list[k] == "":
             del wordpos_list[k]
     #print(wordpos_list)
+    """
 
     k = 0
     for k in range(len(wordpos_list)):
@@ -96,24 +83,17 @@ def corpus_read():
         if w not in word_dict.keys():
             word_dict[w].get(c_dict.copy())
     """
-
     i=0
     j=0
+
     #二重辞書へ出現数を登録する
     for i in range(len(word_list)) :
         w = word_list[i]
         #print(w,word_dict[w])
         p = pos_list[i]
-
         for j in range(len(pos_index)) :
             if pos_list[i] == pos_index[j]:
                 word_dict[word_list[i]][pos_index[j]] += 1
-        """
-        #print("id", id(word_dict[w]))
-        print(w,word_dict[w])
-        print()
-        #print()
-        """
 
     print("word_dict", word_dict)
 
