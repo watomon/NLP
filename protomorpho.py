@@ -15,7 +15,7 @@ def corpus_read():
 
     #空白とスラッシュを区切りにして偶数番目に語句、奇数番目に品詞にする
     f = open('data/sample.train','r')
-    corpus = f.readline()
+    corpus = f.read()
     f.close()
 
     wordpos_list = re.split('[/ ]', corpus)
@@ -24,7 +24,7 @@ def corpus_read():
     #改行文字の除去処理
     for i in wordpos_list:
         print(i)
-        i.lstrip("\n")
+        i.rstrip("\n")
 
     for i in range(len(wordpos_list)) :
         if wordpos_list[i] == "\n" :
@@ -85,12 +85,15 @@ def corpus_read():
     """
     i=0
     j=0
-
+    print(len(word_list))
+    print(len(pos_list))
     #二重辞書へ出現数を登録する
     for i in range(len(word_list)) :
+        """
         w = word_list[i]
         #print(w,word_dict[w])
         p = pos_list[i]
+        """
         for j in range(len(pos_index)) :
             if pos_list[i] == pos_index[j]:
                 word_dict[word_list[i]][pos_index[j]] += 1
