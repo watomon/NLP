@@ -15,15 +15,17 @@ def corpus_read():
 
     #空白とスラッシュを区切りにして偶数番目に語句、奇数番目に品詞にする
     f = open('data/sample.train','r')
-    corpus = f.read()
+    corpus1 = f.read()
+    corpus = corpus1.replace("\n", " ")
     f.close()
+    #print(corpus)
 
     wordpos_list = re.split('[/ ]', corpus)
     #print(wordpos_list)
 
     #改行文字の除去処理
     for i in wordpos_list:
-        print(i)
+        #print(i)
         i.rstrip("\n")
 
     for i in range(len(wordpos_list)) :
@@ -45,7 +47,9 @@ def corpus_read():
             pos_list.append(wordpos_list[k])
         else :
             break
+    word_list.pop(-1)
     #print(word_list)
+    #print(pos_list)
 
     #重複無しの単語のリストを作成
     for word in word_list :
