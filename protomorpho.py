@@ -68,7 +68,6 @@ def corpus_read():
     word_dict = {}
 
     #品詞とその出現数の辞書を作成
-
     for p in pos_index :
         c_dict[p] = 0   #最初は全て出現数は０にする
 
@@ -89,22 +88,29 @@ def corpus_read():
     """
     i=0
     j=0
-    print(len(word_list))
-    print(len(pos_list))
+    #print(len(word_list))
+    #print(len(pos_list))
     #二重辞書へ出現数を登録する
     for i in range(len(word_list)) :
         """
         w = word_list[i]
-        #print(w,word_dict[w])
+        print(w,word_dict[w])
         p = pos_list[i]
         """
         for j in range(len(pos_index)) :
             if pos_list[i] == pos_index[j]:
-                word_dict[word_list[i]][pos_index[j]] += 1
-
-    print("word_dict", word_dict)
+                word_dict[  word_list[i]][pos_index[j]] += 1
 
 
+
+    max = 0
+    for w in word_index:
+        for p in pos_index:
+            if max <= word_dict[w][p]:
+                word_dict[w]
+        print(w,word_dict[w])
+
+    #print("word_dict", word_dict)
 
 def main():
     #bun01 = "Time flies like an arrow"  #入力する文章
